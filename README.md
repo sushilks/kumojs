@@ -156,14 +156,15 @@ App is running on port: 8084
  
  ### change the temperature for cooling
   ```
-  > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/cooltemp/68
+  > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/cool/temp/68
   {"r":{"indoorUnit":{"status":{"spCool":20}}}}
   ```
   
  ### change the temperature for heating
   ```
- > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/heattemp/68
+ > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/heat/temp/68
    {"r":{"indoorUnit":{"status":{"spHeat":20}}}}
  ```
    
  
+## TODO 
