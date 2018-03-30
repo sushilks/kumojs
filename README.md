@@ -14,7 +14,11 @@ A NodeJS server which accepts REST commands and configures Mitsubishi Airconditi
  
 ## To setup you configuraiton file. 
 ---------
-This is needed to download your configuration form the cloud. The download files will be stored in kumo.cfg
+This step is important step, this is what creates the configuraiton file that has all the information about the
+units. The CLI mode and the server mode will use this file to work.
+When you run this, the script connects to the cloud and downloads the configuration. (Hopefully This is not going 
+ to be disabled by the cloud folks).
+The download files will be stored in kumo.cfg
 
 ```
 > npm run config
@@ -100,10 +104,10 @@ Status: {"r":{"indoorUnit":{"status":{"roomTemp":19.5,"mode":"off","spCool":25.5
 ```
 
 ### to change the fan speed in the guest room
-'''
+```
 > npm run cmd room 'Guest Room' fan powerful
 
-'''
+```
 
 ### Turn off the air conditioner to cool in Guest room
 ```

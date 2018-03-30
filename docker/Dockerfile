@@ -13,6 +13,6 @@ RUN bash -c ". /root/.nvm/nvm.sh && nvm install v6.11.2"
 RUN cd /root && git clone https://github.com/sushilks/kumojs.git
 RUN bash -c ". /root/.nvm/nvm.sh && cd /root/kumojs && npm install"
 RUN bash -c ". /root/.nvm/nvm.sh && cd /root/kumojs && npm run build"
-ADD kumo.cfg
+ADD kumo.cfg /root/kumojs/build/kumo.cfg
 RUN echo "cd /root/kumojs && npm run server" > /root/run_kumojs.sh
 RUN chmod +x /root/run_kumojs.sh
