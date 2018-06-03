@@ -91,7 +91,7 @@ export class Kumo {
         return hash
     }
 
-    public async cmd(address: string, pdata:string): Promise<any> {
+    public async cmd_(address: string, pdata:string): Promise<any> {
         return new Promise((resolve, reject) => {
             let url = 'http://' + address + '/api?m=' + this.cryptokeyFromAddress(pdata, address)
             request.put({
@@ -120,6 +120,25 @@ export class Kumo {
                 });
         });
     }
+    private timeout(ms: Number): Promise <any> {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    public async cmd(address: string, pdata:string): Promise<any> {
+      for (let cnt = 0; cnt < 10; ++cnt) {
+            try {
+              const dt = await  this.cmd_(address, pdata);
+              return dt;
+            } catch (e) {
+              console.error("Error when trying to send command ", pdata, " to " , address);
+              console.error(e);
+              await this.timeout(5000); 
+            }
+      }
+      const dt = await  this.cmd_(address, pdata);
+      return dt;
+
+    }
+
     public async getStatus(address:string):Promise<any> {
         let c: string = JSON.stringify({"c":{"indoorUnit":{"status":{}}}});
         return this.cmd(address, c)
