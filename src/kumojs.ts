@@ -144,14 +144,14 @@ export class Kumo {
         return this.cmd(address, c)
     }
     public async setMode(address:string, mode:string): Promise<any> {
-        if (["off", 'heat', 'cool', 'dry'].indexOf(mode) < 0) {
+        if (["off", 'heat', 'cool', 'dry', 'vent', 'auto'].indexOf(mode) < 0) {
             throw new Error("Invalid Mode:"+mode);
         }
         let c:string = JSON.stringify({"c":{"indoorUnit":{"status":{"mode":mode}}}});
         return this.cmd(address, c)
     }
     public async setFanSpeed(address:string, speed:string): Promise<any> {
-        if (['quiet', 'low', 'powerful'].indexOf(speed) < 0) {
+        if (['quiet', 'low', 'powerful', 'auto', 'superPowerful'].indexOf(speed) < 0) {
             throw new TypeError("Invalid Fan Speed:"+speed);
         }
         let c:string = JSON.stringify({"c":{"indoorUnit":{"status":{"fanSpeed":speed}}}});

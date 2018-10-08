@@ -6,8 +6,8 @@ const cfg = require('./kumo.cfg');
 var kumo = new Kumo(cfg);
 
 const args = neodoc.run(`
-usage: kumoCmd.js room <room> mode ( off | heat | cool | dry )
-       kumoCmd.js room <room> fan ( quiet | low | powerful )
+usage: kumoCmd.js room <room> mode ( off | heat | cool | dry | vent | auto )
+       kumoCmd.js room <room> fan ( quiet | low | powerful | super | auto )
        kumoCmd.js room <room> vent [ auto | horizontal | midhorizontal | midpoint | midvertical | vertical | swing ]
        kumoCmd.js room <room> status
        kumoCmd.js room <room> cool temp <temp>
@@ -22,7 +22,7 @@ async function processCmd(args:any) {
         let room = args['<room>'];
         let address = kumo.getAddress(room);
         if (address == '') {
-            throw new Error("Unale to find Room:" + room);
+            throw new Error("Unable to find Room:" + room);
         }
         if ('mode' in args && args['mode']) {
             let cmd = '';
@@ -34,6 +34,10 @@ async function processCmd(args:any) {
                 cmd = 'cool'
             } else if ('dry' in args) {
                 cmd = 'dry'
+            } else if ('auto' in args) {
+                cmd = 'auto'
+            } else if ('vent' in args) {
+                cmd = 'vent'
             }
             let res = await kumo.setMode(address, cmd);
             return res;
@@ -45,6 +49,10 @@ async function processCmd(args:any) {
                 cmd = 'low'
             } else if ('powerful' in args) {
                 cmd = 'powerful'
+            } else if ('super' in args) {
+                cmd = 'superPowerful'
+            } else if ('auto' in args) {
+                cmd = 'auto'
             }
             return await kumo.setFanSpeed(address, cmd);
         } else if ('vent' in args && args['vent']) {
