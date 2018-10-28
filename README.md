@@ -3,6 +3,8 @@
 
 A NodeJS server which accepts REST commands and configures Mitsubishi Airconditioners that use Kumo Gateway
 
+To install run
+npm install kumojs
 
 ## TO setup build env and packages
 ---------
@@ -11,12 +13,12 @@ A NodeJS server which accepts REST commands and configures Mitsubishi Airconditi
 ## TO BUILD
 ---------
 > npm run build
- 
-## To setup you configuraiton file. 
+
+## To setup you configuraiton file.
 ---------
 This step is important step, this is what creates the configuraiton file that has all the information about the
 units. The CLI mode and the server mode will use this file to work.
-When you run this, the script connects to the cloud and downloads the configuration. (Hopefully This is not going 
+When you run this, the script connects to the cloud and downloads the configuration. (Hopefully This is not going
  to be disabled by the cloud folks).
 The download files will be stored in kumo.cfg
 
@@ -65,7 +67,7 @@ Build the container
 
 ## Usages in CLI Mode
 ---------
-in cli mode you can send a command to the air-conditioner form the shell. 
+in cli mode you can send a command to the air-conditioner form the shell.
 
 ### Help
 ```
@@ -99,7 +101,7 @@ Status: {"r":{"indoorUnit":{"status":{"roomTemp":19.5,"mode":"off","spCool":25.5
 
 ### Turn on one of the air conditioner to cool
 ```
-> npm run cmd room 'Guest Room' mode cool 
+> npm run cmd room 'Guest Room' mode cool
 {"r":{"indoorUnit":{"status":{"mode":"off"}}}}
 ```
 
@@ -111,23 +113,23 @@ Status: {"r":{"indoorUnit":{"status":{"roomTemp":19.5,"mode":"off","spCool":25.5
 
 ### Turn off the air conditioner to cool in Guest room
 ```
-> npm run cmd room 'Guest Room' mode off 
+> npm run cmd room 'Guest Room' mode off
 ```
 
 ## Usages when running as an API server
 ---------
-Start the server 
+Start the server
 ```
 > npm run server
 App is running on port: 8084
 ```
 ### Get a list of rooms
- 
+
  ```
  > curl http://127.0.0.1:8084/v0/rooms
  ["Guest Room","Master Bedroom","Kids Room"]
  ```
- 
+
 ### Get the status of Guest Room
 ```
 > curl http://127.0.0.1:8084/v0/room/Guest%20Room/status
@@ -147,24 +149,24 @@ App is running on port: 8084
  > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/speed/powerful
  {"r":{"indoorUnit":{"status":{"fanSpeed":"powerful"}}}}
  ```
- 
+
  ### Change the vent setting
  ```
  curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/vent/swing
  {"r":{"indoorUnit":{"status":{"vaneDir":"horizontal"}}}}
  ```
- 
+
  ### change the temperature for cooling
   ```
   > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/cool/temp/68
   {"r":{"indoorUnit":{"status":{"spCool":20}}}}
   ```
-  
+
  ### change the temperature for heating
   ```
  > curl -XPUT http://127.0.0.1:8084/v0/room/Guest%20Room/heat/temp/68
    {"r":{"indoorUnit":{"status":{"spHeat":20}}}}
  ```
-   
- 
-## TODO 
+
+
+## TODO

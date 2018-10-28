@@ -1,6 +1,6 @@
 {
   "name": "kumojs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Sushil Singh",
   "description": "Api Gateway and Controller for Mitsubishi Airconditioners",
   "dependencies": {
@@ -21,6 +21,10 @@
     "config": "node --harmony ./build/kumoConfig.js",
     "cmd": "node --harmony ./build/kumoCmd.js",
     "server": "node --harmony ./build/kumoServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sushilks/kumojs.git"
   },
   "licenses": [
     {
