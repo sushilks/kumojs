@@ -4,13 +4,27 @@
 A NodeJS server which accepts REST commands and configures Mitsubishi Airconditioners that use Kumo Gateway
 
 # To install run.
+```
 >npm install kumojs
+```
+You will need to create a kumo.cfg file for any of the commands to work
+# configuration
+```
+>kumoconfig
+```
+this will create the kumo.cfg file that is needed for all the later commandsa
 # cli
 after install cli can be accessed by running "kumo"
+```
 >kumo help
+```
 will show the different options
 CLI is described in detail in the later part of the readme
-
+# Server
+To start the server run
+```
+>kumoserver
+```
 # TO Work with the Souce Repository.
 
 ## TO setup build env and packages

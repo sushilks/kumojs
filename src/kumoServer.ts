@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('source-map-support').install();
 
 const port = process.env.KUMO_SERVER_PORT || 8084;
