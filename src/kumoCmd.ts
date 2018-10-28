@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('source-map-support').install();
 //const request = require('request');
 const neodoc = require('neodoc');
