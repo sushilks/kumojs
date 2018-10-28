@@ -3,8 +3,15 @@
 
 A NodeJS server which accepts REST commands and configures Mitsubishi Airconditioners that use Kumo Gateway
 
-To install run
-npm install kumojs
+# To install run.
+>npm install kumojs
+# cli
+after install cli can be accessed by running "kumo"
+>kumo help
+will show the different options
+CLI is described in detail in the later part of the readme
+
+# TO Work with the Souce Repository.
 
 ## TO setup build env and packages
 ---------
@@ -72,6 +79,8 @@ in cli mode you can send a command to the air-conditioner form the shell.
 ### Help
 ```
 > npm run cmd help
+or
+> kumo help
 usage: kumoCmd.js room <room> mode ( off | heat | cool | dry )
        kumoCmd.js room <room> fan ( quiet | low | powerful )
        kumoCmd.js room <room> vent [ auto | horizontal | midhorizontal | midpoint | midvertical | vertical | swing ]
