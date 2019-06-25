@@ -25,28 +25,36 @@ var rl = readline.createInterface({
 
 function processcfg(acc:any, j:any): KumoCfg {
     var mycfg: KumoCfg = {}
+    mycfg[acc] = parsechildren(j);
+    return mycfg;
+}
+
+function parsechildren(j:any) {
     let mycl: {[hash:string]:KumoCfgElement} = {}
     for (let children in j) {
         let child = j[children]
         for (let zone in child['zoneTable']) {
             let z = child['zoneTable'][zone]
-            let myc: KumoCfgElement = {
-                serial: z.serial,
-                label: z.label,
-                cryptoSerial: z.cryptoSerial,
-                cryptoKeySet: z.cryptoKeySet,
-                password: z.password,
-                address: z.address,
-                S: S,
-                W: W
-            }
-            mycl[zone] = myc
+            mycl[zone] = parsezone(z);
         }
-        mycfg[acc] = mycl
+        mycl = Object.assign(mycl, parsechildren(child['children']));
     }
-    return mycfg;
+    return mycl;
 }
 
+function parsezone(z:any): KumoCfgElement {
+    let myc: KumoCfgElement = {
+        serial: z.serial,
+        label: z.label,
+        cryptoSerial: z.cryptoSerial,
+        cryptoKeySet: z.cryptoKeySet,
+        password: z.password,
+        address: z.address,
+        S: S,
+        W: W
+    }
+    return myc;
+}
 
 function post(post_data: string) {
     request.post({
