@@ -37,6 +37,12 @@ export class Kumo {
         }
         return r
     }
+
+    private f2c(tempF: number): number {
+        // round to nearest .5 C
+        return Math.round((tempF - 32) * 10 / 9) / 2;
+    }
+
     public getRoomList(): Array<string> {
         return Object.keys(this.cfgr);
     }
@@ -167,12 +173,12 @@ export class Kumo {
         return this.cmd(address, c)
     }
     public async setCoolTemp(address:string, tempF:number): Promise<any> {
-        let tempC=(tempF - 32) * 5 / 9;
+        let tempC=this.f2c(tempF);
         let c:string = JSON.stringify({"c":{"indoorUnit":{"status":{"spCool":tempC}}}});
         return this.cmd(address, c)
     }
     public async setHeatTemp(address:string, tempF:number): Promise<any> {
-        let tempC=(tempF - 32) * 5 / 9;
+        let tempC=this.f2c(tempF);
         let c:string = JSON.stringify({"c":{"indoorUnit":{"status":{"spHeat":tempC}}}});
         return this.cmd(address, c)
     }
