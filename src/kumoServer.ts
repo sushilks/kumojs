@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 const app = express()
 
 const SKumo = require('./kumojs').Kumo;
-const Scfg = require('./kumo.cfg');
+const Scfg = require(process.cwd() + '/kumo.cfg');
 var kumo = new SKumo(Scfg);
 
 
@@ -182,7 +182,7 @@ app.listen(port, function () {
 })
 
 const sleep = (ms: number) => {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
         setTimeout(() => {
             resolve();
         }, ms);
