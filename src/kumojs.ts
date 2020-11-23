@@ -57,9 +57,9 @@ export class Kumo {
             sjcl.hash.sha256.hash(
                 sjcl.codec.hex.toBits(
                     this.l2h(
-                        Array.prototype.map.call(p+dt, function (m2:any) {
+                        Array.prototype.map.call(p+dt, function (m2:String) {
                             return m2.charCodeAt(0)
-                        })
+                        }) as number[]
                     )
                 )
             )
@@ -72,7 +72,7 @@ export class Kumo {
         let dt3 = this.h2l(dt2)
         dt3[64] = 8
         dt3[65] = 64
-        Array.prototype.splice.apply(dt3, [32, 32].concat(dt1_l));
+        dt3.splice(32, 32, ...dt1_l)
         dt3[66] =  cfg.S
         let cryptoserial = this.h2l(cfg['cryptoSerial'])
         dt3[79] = cryptoserial[8]
@@ -84,7 +84,7 @@ export class Kumo {
         dt3[85] = cryptoserial[1]
         dt3[86] = cryptoserial[2]
         dt3[87] = cryptoserial[3]
-        Array.prototype.splice.apply(dt3, [0, 32].concat(W))
+        dt3.splice(0, 32, ...W)
         let hash = sjcl.codec.hex.fromBits(
             sjcl.hash.sha256.hash(sjcl.codec.hex.toBits(this.l2h(dt3)))
         )
@@ -120,7 +120,7 @@ export class Kumo {
                 });
         });
     }
-    private timeout(ms: Number): Promise <any> {
+    private timeout(ms: number): Promise <any> {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
     public async cmd(address: string, pdata:string): Promise<any> {
